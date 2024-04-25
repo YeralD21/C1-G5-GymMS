@@ -25,4 +25,11 @@ spring:
           uri: lb://ms-membresia-service
           predicates:
             - Path=/membresia/**
-        
+        - id: ms-catalogo-service
+          uri: lb://ms-catalogo-service
+          predicates:
+            - Path=/catalogo/**
+        - id: ms-pedido-service
+          uri: lb://ms-pedido-service
+          predicates:
+            - Path=/pedido/**
