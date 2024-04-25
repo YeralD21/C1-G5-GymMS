@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff632da4-d4f6-437f-b35e-f7a4d5ead324" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../config-data/ms-pedido-service.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/controller/PedidoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/dto/CategoriaDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/dto/ClienteDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/dto/ProductoDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/entity/Pedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/entity/PedidoDetalle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/feing/ClienteFeing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/feing/ProductoFeing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/repository/PedidoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/service/Impl/PedidoServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ms-pedido-service/src/main/java/com/example/mspedidoservice/service/PedidoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,31 +12,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2fZIqFmXfDPMwtclT5FYW5oXGRa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/C1-G5-GymMS/ms-catalogo&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,6 +40,8 @@
       <option name="presentableId" value="Default" />
       <updated>1714002365901</updated>
       <workItem from="1714002368459" duration="54000" />
+      <workItem from="1714008305796" duration="5000" />
+      <workItem from="1714008335731" duration="1000" />
     </task>
     <servers />
   </component>

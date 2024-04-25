@@ -33,7 +33,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Pedido buscarPorId(Integer id) {
         Pedido pedido = pedidoRepository.findById(id).get();
-        pedido.setClienteDto(clienteFeing.findById(pedido.getClienteId()).getBody());
+        pedido.setClienteDto(clienteFeing.findById(pedido.getClientegymId()).getBody());
         List<PedidoDetalle> pedidoDetalles = pedido.getDetalles().stream().map(pedidoDetalle -> {
             pedidoDetalle.setProducto(productoFeing.buscarPorId(pedidoDetalle.getProductoId()).getBody());
             return pedidoDetalle;

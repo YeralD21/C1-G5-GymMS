@@ -5,9 +5,12 @@ import lombok.Data;
 @Data
 public class ClienteDto {
     private Integer id;
-    private String name;
-    private String adress;
-    private Integer age;
-    private String gender;
-    private String email;
+    private String nombre;
+    private String apellido;
+    private String genero;
+    private String edad;
+    private String telefono;
+    private String correo;
+    private String tipocliente;
+
 }

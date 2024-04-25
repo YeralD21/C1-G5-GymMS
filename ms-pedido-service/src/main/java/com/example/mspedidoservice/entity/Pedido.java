@@ -15,7 +15,7 @@ public class Pedido {
     private String serie;
     private String numero;
     private String descripcion;
-    private Integer clienteId;
+    private Integer clientegymId;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "venta_id")
