@@ -6,6 +6,12 @@
       <list>
         <option value="$PROJECT_DIR$/ms-asistencia/pom.xml" />
         <option value="$PROJECT_DIR$/ms-config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-catalogogym/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-gateway-server/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-clientegym/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-membresia/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-pedido-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-registry-server/pom.xml" />
       </list>
     </option>
   </component>

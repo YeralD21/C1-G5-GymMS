@@ -18,7 +18,7 @@ public class  	MsAsistenciaApplication {
 		return new OpenAPI().info(new Info()
 				.title("OPEN API MICROSERVICIO ASISTENCIA")
 				.version("0.0.1")
-				.description("servicios web Asistencia")
+				.description("servicios web Asiste ncia")
 				.termsOfService("http:// swagger.io/terms")
 				.license(new  License().name("Apache 2.0").url("http://springdoc.org"))
 		);

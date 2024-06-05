@@ -28,7 +28,7 @@ public class MembresiaServiceImpl implements MembresiaService {
     @Override
     public Membresia guardar(Membresia membresia) {
         // Si el ID del cliente está presente, busca la información del cliente y la asigna al DTO
-        if (membresia.getClientegymId() != null) {
+            if (membresia.getClientegymId() != null) {
             ClientegymDto clientegymDto = clientegymFeign.buscarPorId(membresia.getClientegymId()).getBody();
             if (clientegymDto != null) {
                 membresia.setClientegymDto(clientegymDto);
@@ -39,6 +39,7 @@ public class MembresiaServiceImpl implements MembresiaService {
 
         return membresiaRepository.save(membresia);
     }
+
     @Override
     public Membresia buscarPorId(Integer id) {
         Membresia membresia = membresiaRepository.findById(id)
@@ -51,6 +52,7 @@ public class MembresiaServiceImpl implements MembresiaService {
 
         return membresia;
     }
+
     @Override
     public Membresia editar(Membresia membresia) {return membresiaRepository.save(membresia);
     }
