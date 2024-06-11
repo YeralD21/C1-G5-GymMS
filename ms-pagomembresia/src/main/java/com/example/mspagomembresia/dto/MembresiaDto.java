@@ -11,6 +11,6 @@ public class MembresiaDto {
     private Date fechafin;
     private String tipomembresia;
     private Double costo;
-   
+
 
 }
