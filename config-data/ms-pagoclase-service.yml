@@ -15,7 +15,7 @@ spring:
     show-sql: true
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ms-paagoclase
+    url: jdbc:mysql://localhost:3306/ms-pagoclase
     username: root
     password:
 
