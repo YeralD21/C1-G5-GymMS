@@ -1,4 +1,4 @@
-package com.example.msasesoramiento.dto;
+package com.example.mspagomembresia.dto;
 
 import lombok.Data;
 

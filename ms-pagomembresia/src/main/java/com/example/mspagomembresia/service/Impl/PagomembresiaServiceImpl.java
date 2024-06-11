@@ -1,5 +1,7 @@
 package com.example.mspagomembresia.service.Impl;
 
+import com.example.mspagomembresia.dto.ClientegymDto;
+import com.example.mspagomembresia.dto.MembresiaDto;
 import com.example.mspagomembresia.entity.Pagomembresia;
 import com.example.mspagomembresia.repository.PagomembresiaRepository;
 import com.example.mspagomembresia.service.PagoMembresiaService;
@@ -12,6 +14,10 @@ import java.util.List;
 public class PagomembresiaServiceImpl implements PagoMembresiaService {
     @Autowired
 private PagomembresiaRepository pagomembresiaRepository;
+    @Autowired
+    private ClientegymDto clientegymDto;
+    @Autowired
+    private MembresiaDto membresiaDto;
     @Override
     public List<Pagomembresia> listar() {
         return pagomembresiaRepository.findAll();

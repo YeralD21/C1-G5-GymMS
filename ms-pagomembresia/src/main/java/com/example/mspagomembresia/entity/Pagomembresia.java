@@ -19,4 +19,6 @@ public class Pagomembresia {
     private Date fechaPago;
 
     private Integer clientegymId;
+    private Integer membresiaId;
+
 }

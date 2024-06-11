@@ -1,5 +1,8 @@
 package com.example.msasesoramiento.entity;
 
+import com.example.msasesoramiento.dto.ClienteaseDto;
+import com.example.msasesoramiento.dto.TrainerDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -17,10 +20,16 @@ public class Asesoramiento {
     private String rutina;
     private Date fechaInicio;
     private Date fechaFin;
-
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Integer clientegymId;
     private Integer trainerId;
 
+    @Transient
+    ClienteaseDto clienteaseDto;
+
+    @Transient
+    TrainerDto trainerDto;
 
 
 }
