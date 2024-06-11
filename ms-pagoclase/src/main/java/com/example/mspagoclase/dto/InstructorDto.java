@@ -1,14 +1,12 @@
-package com.example.msasesoramiento.dto;
+package com.example.mspagoclase.dto;
 
 import lombok.Data;
 
 @Data
-public class TrainerDto {
+public class InstructorDto {
     private Integer id;
     private String nombre;
-    private String apellido;
     private String especialidad;
-    private String email;
+    private Integer edad;
     private String telefono;
-
 }

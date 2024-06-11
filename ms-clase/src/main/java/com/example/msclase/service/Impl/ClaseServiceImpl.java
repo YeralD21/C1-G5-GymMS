@@ -13,7 +13,7 @@ import java.util.List;
 public class ClaseServiceImpl implements ClaseService {
     @Autowired
     private ClaseRepository claseRepository;
-    
+
     @Autowired
     private InstructorFeing instructorFeing;
     @Override
