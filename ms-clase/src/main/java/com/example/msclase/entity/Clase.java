@@ -18,11 +18,7 @@ public class Clase {
     private Integer cuposDisponibles;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Integer clienteclassId;
     private Integer instructorId;
-
-    @Transient
-    private ClienteclassDto clienteclassDto;
 
     @Transient
     private InstructorDto instructorDto;
