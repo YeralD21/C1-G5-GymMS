@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class PedidoServiceImpl implements PedidoService {
+
+    private static final double IGV_PERCENTAGE = 0.18; // Porcentaje de IGV
     @Autowired
     private PedidoRepository pedidoRepository;
 
@@ -51,5 +53,10 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public void eliminar(Integer id) {
         pedidoRepository.deleteById(id);
+    }
+    @Override
+    public double calcularPrecioTotalConIGV(double subtotal) {
+        double igv = subtotal * IGV_PERCENTAGE;
+        return subtotal + igv;
     }
 }

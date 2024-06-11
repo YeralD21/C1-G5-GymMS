@@ -10,4 +10,5 @@ public interface PedidoService {
     public Pedido buscarPorId(Integer Id);
     public Pedido editar(Pedido pedido);
     public void eliminar(Integer Id);
+    public double calcularPrecioTotalConIGV(double subtotal);
 }
