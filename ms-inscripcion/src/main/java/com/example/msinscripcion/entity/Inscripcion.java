@@ -1,10 +1,9 @@
 package com.example.msinscripcion.entity;
 
+import com.example.msinscripcion.dto.ClaseinscripcionDto;
+import com.example.msinscripcion.dto.ClienteinscripcionDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,4 +17,9 @@ public class Inscripcion {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Integer clientegymId;
     private Integer claseId;
+
+    @Transient
+    private ClienteinscripcionDto clienteinscripcionDto;
+    @Transient
+    private ClaseinscripcionDto claseinscripcionDto;
 }
