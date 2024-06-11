@@ -67,4 +67,4 @@ spring:
         - id: ms-asistencia-service
           uri: lb://ms-asistencia-service
           predicates:
-            - Path=/asistencia/**
+            - Path=/asistencia/**,  /ususario/**
