@@ -2,13 +2,15 @@ package com.example.mspagomembresia.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class MembresiaDto {
     private Integer id;
-    private String fechainicio;
-    private String fechafin;
+    private Date fechainicio;
+    private Date fechafin;
     private String tipomembresia;
-    private String costo;
+    private Double costo;
     private ClientegymDto clientegymDto;
 
 }
