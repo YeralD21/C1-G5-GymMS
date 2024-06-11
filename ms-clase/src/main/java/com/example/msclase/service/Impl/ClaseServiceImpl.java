@@ -1,6 +1,8 @@
 package com.example.msclase.service.Impl;
 
 import com.example.msclase.entity.Clase;
+import com.example.msclase.feing.ClienteclassFeing;
+import com.example.msclase.feing.InstructorFeing;
 import com.example.msclase.repository.ClaseRepository;
 import com.example.msclase.service.ClaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ import java.util.List;
 public class ClaseServiceImpl implements ClaseService {
     @Autowired
     private ClaseRepository claseRepository;
+    @Autowired
+    private ClienteclassFeing clienteclassFeing;
+    @Autowired
+    private InstructorFeing instructorFeing;
     @Override
     public List<Clase> listar() {
         return claseRepository.findAll();
@@ -24,7 +30,10 @@ public class ClaseServiceImpl implements ClaseService {
 
     @Override
     public Clase buscarPorId(Integer id) {
-        return claseRepository.findById(id).get();
+        Clase clase = claseRepository.findById(id).get();
+        clase.setClienteclassDto(clienteclassFeing.buscarPorId(clase.getClienteclassId()).getBody());
+        clase.setInstructorDto(instructorFeing.buscarPorId(clase.getInstructorId()).getBody());
+        return clase;
     }
 
     @Override

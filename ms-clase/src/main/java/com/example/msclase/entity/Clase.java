@@ -1,5 +1,7 @@
 package com.example.msclase.entity;
 
+import com.example.msclase.dto.ClienteclassDto;
+import com.example.msclase.dto.InstructorDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,5 +18,12 @@ public class Clase {
     private Integer cuposDisponibles;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Integer clienteclassId;
     private Integer instructorId;
+
+    @Transient
+    private ClienteclassDto clienteclassDto;
+
+    @Transient
+    private InstructorDto instructorDto;
 }
