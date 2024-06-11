@@ -1,8 +1,8 @@
-package com.example.msasesoramiento.service.Impl.Impl;
+package com.example.msasesoramiento.service.Impl;
 
 import com.example.msasesoramiento.entity.Asesoramiento;
 import com.example.msasesoramiento.repository.AsesoramientoRepository;
-import com.example.msasesoramiento.service.Impl.AsesoramientoService;
+import com.example.msasesoramiento.service.AsesoramientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

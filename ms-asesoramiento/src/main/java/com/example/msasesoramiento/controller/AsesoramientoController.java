@@ -1,7 +1,7 @@
 package com.example.msasesoramiento.controller;
 
 import com.example.msasesoramiento.entity.Asesoramiento;
-import com.example.msasesoramiento.service.Impl.AsesoramientoService;
+import com.example.msasesoramiento.service.AsesoramientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

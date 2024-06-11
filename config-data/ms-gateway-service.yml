@@ -44,3 +44,7 @@ spring:
           uri: lb://ms-trainer-service
           predicates:
             - Path=/trainer/**
+        - id: ms-pagomembresia-service
+          uri: lb://ms-pagomembresia-service
+          predicates:
+            - Path=/pagomembresia/**

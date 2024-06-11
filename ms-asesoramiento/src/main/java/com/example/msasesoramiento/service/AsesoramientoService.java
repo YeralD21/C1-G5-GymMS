@@ -1,4 +1,4 @@
-package com.example.msasesoramiento.service.Impl;
+package com.example.msasesoramiento.service;
 
 import com.example.msasesoramiento.entity.Asesoramiento;
 
