@@ -13,6 +13,7 @@ public class Asesoramiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
     private String tipoMembresia;
     private String objetivo;
@@ -20,16 +21,14 @@ public class Asesoramiento {
     private String rutina;
     private Date fechaInicio;
     private Date fechaFin;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Integer clientegymId;
     private Integer trainerId;
 
     @Transient
-    ClienteaseDto clienteaseDto;
+    private ClienteaseDto clienteaseDto;
 
     @Transient
-    TrainerDto trainerDto;
-
-
+    private TrainerDto trainerDto;
 }

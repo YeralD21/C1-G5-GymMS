@@ -1,9 +1,8 @@
 package com.example.mspagomembresia.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.mspagomembresia.dto.ClientegymDto;
+import com.example.mspagomembresia.dto.MembresiaDto;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -21,4 +20,9 @@ public class Pagomembresia {
     private Integer clientegymId;
     private Integer membresiaId;
 
+    @Transient
+    private ClientegymDto clientegymDto;
+
+    @Transient
+    private MembresiaDto membresiaDto;
 }

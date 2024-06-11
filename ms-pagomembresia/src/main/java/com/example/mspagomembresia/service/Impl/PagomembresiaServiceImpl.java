@@ -3,6 +3,8 @@ package com.example.mspagomembresia.service.Impl;
 import com.example.mspagomembresia.dto.ClientegymDto;
 import com.example.mspagomembresia.dto.MembresiaDto;
 import com.example.mspagomembresia.entity.Pagomembresia;
+import com.example.mspagomembresia.feing.ClientegymFeing;
+import com.example.mspagomembresia.feing.MembresiaFeing;
 import com.example.mspagomembresia.repository.PagomembresiaRepository;
 import com.example.mspagomembresia.service.PagoMembresiaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class PagomembresiaServiceImpl implements PagoMembresiaService {
     @Autowired
 private PagomembresiaRepository pagomembresiaRepository;
     @Autowired
-    private ClientegymDto clientegymDto;
+    private ClientegymFeing clientegymFeing;
     @Autowired
-    private MembresiaDto membresiaDto;
+    private MembresiaFeing membresiaFeing;
     @Override
     public List<Pagomembresia> listar() {
         return pagomembresiaRepository.findAll();
@@ -30,9 +32,11 @@ private PagomembresiaRepository pagomembresiaRepository;
 
     @Override
     public Pagomembresia buscarPorId(Integer id) {
-        return pagomembresiaRepository.findById(id).get();
+        Pagomembresia pagomembresia = pagomembresiaRepository.findById(id).get();
+        pagomembresia.setClientegymDto(clientegymFeing.buscarPorId(pagomembresia.getClientegymId()).getBody());
+        pagomembresia.setMembresiaDto(membresiaFeing.buscarPorId(pagomembresia.getMembresiaId()).getBody());
+        return pagomembresia;
     }
-
     @Override
     public Pagomembresia editar(Pagomembresia pagomembresia) {
         return pagomembresiaRepository.save(pagomembresia);
