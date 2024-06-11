@@ -3,6 +3,8 @@ package com.example.msmembresia.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Data
 public class MembresiaDetalle {
@@ -10,15 +12,10 @@ public class MembresiaDetalle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String fechainicio;
-    private String fechafin;
-    private String tipomembresia;
-    private String costo;
+    private Double descuento;
 
     public MembresiaDetalle() {
-        this.fechainicio = "default start date";  // Example default value
-        this.fechafin = "default end date";      // Example default value
-        this.tipomembresia = "basic";            // Example default value
-        this.costo = "0";                        // Example default value
+            // Example default value
+        this.descuento = (double) 0;                       // Example default value
     }
 }
