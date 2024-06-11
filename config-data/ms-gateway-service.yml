@@ -48,3 +48,19 @@ spring:
           uri: lb://ms-pagomembresia-service
           predicates:
             - Path=/pagomembresia/**
+        - id: ms-instructor-service
+          uri: lb://ms-instructor-service
+          predicates:
+            - Path=/instructor/**
+        - id: ms-clase-service
+          uri: lb://ms-clase-service
+          predicates:
+            - Path=/clase/**
+        - id: ms-pagoclase-service
+          uri: lb://ms-pagoclase-service
+          predicates:
+            - Path=/pagoclase/**
+        - id: ms-inscripcion-service
+          uri: lb://ms-inscripcion-service
+          predicates:
+            - Path=/inscripcion/**
