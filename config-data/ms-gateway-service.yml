@@ -36,3 +36,11 @@ spring:
           uri: lb://ms-pedido-service
           predicates:
             - Path=/pedido/**
+        - id: ms-asesoramiento-service
+          uri: lb://ms-asesoramiento-service
+          predicates:
+            - Path=/asesoramiento/**
+        - id: ms-trainer-service
+          uri: lb://ms-trainer-service
+          predicates:
+            - Path=/trainer/**
