@@ -21,7 +21,10 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/pagomembresia")
 public class PagomembresiaController {
@@ -95,12 +98,17 @@ public class PagomembresiaController {
         }
     }
     @PostMapping("/procesar")
-    public ResponseEntity<String> procesarPago(@RequestBody MontoRequest montoRequest) {
+    public ResponseEntity<Object> procesarPago(@RequestBody MontoRequest montoRequest) {
         BigDecimal monto = montoRequest.getMonto();
         BigDecimal montoConIGV = monto.add(calcularIGV(monto));
         // Procesar pago con montoConIGV
         pagoMembresiaService.procesarPago(montoConIGV);
-        return ResponseEntity.ok("Pago procesado con IGV: " + montoConIGV);
+
+        // Crear respuesta JSON
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Pago procesado con IGV: " + montoConIGV);
+
+        return ResponseEntity.ok(response);
     }
 
     private BigDecimal calcularIGV(BigDecimal monto) {
