@@ -6,6 +6,8 @@ import com.example.mspagomembresia.util.PdfUtils;
 import com.example.mspagomembresia.util.UserExcelExporter;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/pagomembresia")
 public class PagomembresiaController {
+    private static final Logger logger = LoggerFactory.getLogger(PagomembresiaController.class);
+
     @Autowired
     private PagoMembresiaService pagoMembresiaService;
 
@@ -82,10 +86,10 @@ public class PagomembresiaController {
             UserExcelExporter excelExporter = new UserExcelExporter(pagomembresias);
             excelExporter.export(response);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error writing Excel file", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Unexpected error", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }

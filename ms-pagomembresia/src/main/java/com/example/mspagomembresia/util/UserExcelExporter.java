@@ -9,12 +9,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 public class UserExcelExporter {
+    private static final Logger logger = LoggerFactory.getLogger(UserExcelExporter.class);
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private List<Pagomembresia> listUsers;
@@ -45,7 +48,9 @@ public class UserExcelExporter {
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
-        if (value instanceof Integer) {
+        if (value == null) {
+            cell.setCellValue("");
+        } else if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
         } else if (value instanceof Double) {
             cell.setCellValue((Double) value);
@@ -54,7 +59,7 @@ public class UserExcelExporter {
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
         } else {
-            cell.setCellValue(value != null ? value.toString() : ""); // Manejo de valores nulos
+            cell.setCellValue(value.toString());
         }
         cell.setCellStyle(style);
     }
@@ -68,14 +73,18 @@ public class UserExcelExporter {
         style.setFont(font);
 
         for (Pagomembresia pagomembresia : listUsers) {
-            Row row = sheet.createRow(rowCount++);
-            int columnCount = 0;
+            try {
+                Row row = sheet.createRow(rowCount++);
+                int columnCount = 0;
 
-            createCell(row, columnCount++, pagomembresia.getId(), style);
-            createCell(row, columnCount++, pagomembresia.getMonto(), style);
-            createCell(row, columnCount++, pagomembresia.getFechaPago(), style);
-            createCell(row, columnCount++, pagomembresia.getClientegymId(), style);
-            createCell(row, columnCount++, pagomembresia.getMembresiaId(), style);
+                createCell(row, columnCount++, pagomembresia.getId(), style);
+                createCell(row, columnCount++, pagomembresia.getMonto(), style);
+                createCell(row, columnCount++, pagomembresia.getFechaPago(), style);
+                createCell(row, columnCount++, pagomembresia.getClientegymId(), style);
+                createCell(row, columnCount++, pagomembresia.getMembresiaId(), style);
+            } catch (Exception e) {
+                logger.error("Error writing data line for user: " + pagomembresia, e);
+            }
         }
     }
 
@@ -92,5 +101,7 @@ public class UserExcelExporter {
         }
     }
 }
+
+
 
 
