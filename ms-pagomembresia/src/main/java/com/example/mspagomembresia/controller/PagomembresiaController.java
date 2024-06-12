@@ -39,10 +39,6 @@ public class PagomembresiaController {
 
     @PostMapping
     public ResponseEntity<Pagomembresia> guardar(@RequestBody Pagomembresia pagomembresia) {
-        BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal montoConIGV = monto.add(calcularIGV(monto)).setScale(2, RoundingMode.HALF_UP);
-        pagomembresia.setMonto(montoConIGV.doubleValue());
-        pagomembresia.setFechaPago(new Date());
         Pagomembresia pagomembresiaGuardada = pagoMembresiaService.guardar(pagomembresia);
         return ResponseEntity.ok(pagomembresiaGuardada);
     }
