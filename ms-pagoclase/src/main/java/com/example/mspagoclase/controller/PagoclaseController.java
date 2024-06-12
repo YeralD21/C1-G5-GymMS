@@ -25,6 +25,7 @@ public class PagoclaseController {
         Pagoclase pagoclaseGuardada = pagoclaseService.guardar(pagoclase);
         return ResponseEntity.ok(pagoclaseGuardada);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Pagoclase> buscarPorId(@PathVariable(required = true) Integer id){
         return  ResponseEntity.ok(pagoclaseService.buscarPorId(id));

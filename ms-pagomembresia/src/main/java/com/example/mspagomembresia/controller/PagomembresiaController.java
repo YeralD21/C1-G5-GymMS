@@ -94,9 +94,4 @@ public class PagomembresiaController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
-
-    private BigDecimal calcularIGV(BigDecimal monto) {
-        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
-        return monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
-    }
 }
