@@ -31,9 +31,9 @@ private PagomembresiaRepository pagomembresiaRepository;
 
     @Override
     public Pagomembresia guardar(Pagomembresia pagomembresia) {
-        BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto());
-        BigDecimal montoConIGV = monto.add(calcularIGV(monto));
-        pagomembresia.setMonto(montoConIGV.setScale(2, RoundingMode.HALF_UP).doubleValue());
+        BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal montoConIGV = monto.add(calcularIGV(monto)).setScale(2, RoundingMode.HALF_UP);
+        pagomembresia.setMonto(montoConIGV.doubleValue());
         pagomembresia.setFechaPago(new Date());
         return pagomembresiaRepository.save(pagomembresia);
     }
