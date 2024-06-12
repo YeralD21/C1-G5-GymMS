@@ -23,4 +23,4 @@ public class AuthUser {
     private String userName;
     private String password;
 
-    }
+}

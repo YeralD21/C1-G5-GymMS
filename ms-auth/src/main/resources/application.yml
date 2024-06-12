@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: ms-auth-service
@@ -6,4 +5,7 @@ spring:
     active: development
   config:
     import: optional:configserver:http://root:123456@localhost:7070
+
+jwt:
+  secret: secret
 
