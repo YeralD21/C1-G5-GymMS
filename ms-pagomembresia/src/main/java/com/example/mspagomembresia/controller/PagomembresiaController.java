@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -92,6 +93,19 @@ public class PagomembresiaController {
             logger.error("Unexpected error", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+    }
+    @PostMapping("/procesar")
+    public ResponseEntity<String> procesarPago(@RequestBody MontoRequest montoRequest) {
+        BigDecimal monto = montoRequest.getMonto();
+        BigDecimal montoConIGV = monto.add(calcularIGV(monto));
+        // Procesar pago con montoConIGV
+        pagoMembresiaService.procesarPago(montoConIGV);
+        return ResponseEntity.ok("Pago procesado con IGV: " + montoConIGV);
+    }
+
+    private BigDecimal calcularIGV(BigDecimal monto) {
+        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
+        return monto.multiply(porcentajeIGV);
     }
 }
 

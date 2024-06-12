@@ -10,6 +10,7 @@ import com.example.mspagomembresia.service.PagoMembresiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -45,6 +46,13 @@ private PagomembresiaRepository pagomembresiaRepository;
     @Override
     public void eliminar(Integer id) {
         pagomembresiaRepository.deleteById(id);
+    }
+
+    @Override
+    public void procesarPago(BigDecimal montoConIGV) {
+        // Implementa la lógica para procesar el pago con el monto que incluye IGV
+        System.out.println("Procesando pago con IGV: " + montoConIGV);
+        // Aquí iría la lógica de negocio real, como guardar el pago en la base de datos
     }
 
 }
