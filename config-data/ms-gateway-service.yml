@@ -28,6 +28,8 @@ spring:
           uri: lb://ms-membresia-service
           predicates:
             - Path=/membresia/**
+          filters:
+            - AuthFilter
         - id: ms-catalogo-service
           uri: lb://ms-catalogo-service
           predicates:

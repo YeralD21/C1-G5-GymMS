@@ -12,6 +12,13 @@
         <option value="$PROJECT_DIR$/ms-membresia/pom.xml" />
         <option value="$PROJECT_DIR$/ms-pedido-service/pom.xml" />
         <option value="$PROJECT_DIR$/ms-registry-server/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-instructor/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-inscripcion/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-asesoramiento/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-pagoclase/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-pagomembresia/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-trainer/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-auth/pom.xml" />
       </list>
     </option>
   </component>
