@@ -21,9 +21,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/pagomembresia")
@@ -40,6 +38,10 @@ public class PagomembresiaController {
 
     @PostMapping
     public ResponseEntity<Pagomembresia> guardar(@RequestBody Pagomembresia pagomembresia) {
+        BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto());
+        BigDecimal montoConIGV = monto.add(calcularIGV(monto));
+        pagomembresia.setMonto(montoConIGV.doubleValue());
+        pagomembresia.setFechaPago(new Date());
         Pagomembresia pagomembresiaGuardada = pagoMembresiaService.guardar(pagomembresia);
         return ResponseEntity.ok(pagomembresiaGuardada);
     }
@@ -47,7 +49,6 @@ public class PagomembresiaController {
     @GetMapping("/{id}")
     public ResponseEntity<Pagomembresia> buscarPorId(@PathVariable(required = true) Integer id){
         return  ResponseEntity.ok(pagoMembresiaService.buscarPorId(id));
-
     }
 
     @PutMapping("/{id}")
@@ -59,19 +60,18 @@ public class PagomembresiaController {
     public String eliminar(@PathVariable(required = true) Integer id){
         pagoMembresiaService.eliminar(id);
         return "Eliminacion Correcta";
-
     }
+
     @GetMapping("/pdf")
     public ResponseEntity<byte[]> exportPdf() throws IOException, DocumentException {
-        // List<Map<String, Object>> queryResults = myService.executeQuery(request);
-        ByteArrayOutputStream pdfStream = PdfUtils.generatePdfStream(pagoMembresiaService.listar()
-        );
+        ByteArrayOutputStream pdfStream = PdfUtils.generatePdfStream(pagoMembresiaService.listar());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=query_results.pdf");
         headers.setContentLength(pdfStream.size());
         return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
     }
+
     @GetMapping("/excel")
     public void exportToExcel(HttpServletResponse response) {
         response.setContentType("application/octet-stream");
@@ -97,34 +97,9 @@ public class PagomembresiaController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping
-    public ResponseEntity<List<Pagomembresia>> listarPagos() {
-        List<Pagomembresia> pagos = pagoMembresiaService.listar();
-        return ResponseEntity.ok(pagos);
+
+    private BigDecimal calcularIGV(BigDecimal monto) {
+        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
+        return monto.multiply(porcentajeIGV);
     }
-    /**@PostMapping("/procesar")
-    public ResponseEntity<Pagomembresia> procesarPago(@RequestBody MontoRequest montoRequest) {
-        Double monto = montoRequest.getMonto();
-        Double montoConIGV = monto + calcularIGV(monto);
-
-        Pagomembresia pagomembresia = new Pagomembresia();
-        pagomembresia.setMonto(montoConIGV);
-        pagomembresia.setFechaPago(new Date());
-        // Otros campos del objeto pagomembresia se deben configurar aquí según sea necesario
-        pagomembresia = pagoMembresiaService.guardar(pagomembresia);
-
-        return ResponseEntity.ok(pagomembresia);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Pagomembresia>> listarPagos() {
-        List<Pagomembresia> pagos = pagoMembresiaService.listar();
-        return ResponseEntity.ok(pagos);
-    }
-
-    private Double calcularIGV(Double monto) {
-        Double porcentajeIGV = 0.18; // 18% de IGV
-        return monto * porcentajeIGV;
-    }**/
 }
-
