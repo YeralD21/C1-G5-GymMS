@@ -19,12 +19,10 @@ public class UserExcelExporter {
     private XSSFSheet sheet;
     private List<Pagomembresia> listUsers;
 
-    public UserExcelExporter(List<Pagomembresia> pagomembresias)
-    {
+    public UserExcelExporter(List<Pagomembresia> pagomembresias) {
         this.listUsers = pagomembresias;
         workbook = new XSSFWorkbook();
     }
-
 
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Users");
@@ -38,12 +36,10 @@ public class UserExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "monto", style);
-        createCell(row, 2, "fechaPago", style);
-        createCell(row, 3, "clientegymId", style);
-        createCell(row, 4, "membresiaId", style);
-
-
+        createCell(row, 1, "Monto", style);
+        createCell(row, 2, "Fecha Pago", style);
+        createCell(row, 3, "Cliente Gym ID", style);
+        createCell(row, 4, "Membresia ID", style);
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -51,10 +47,14 @@ public class UserExcelExporter {
         Cell cell = row.createCell(columnCount);
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
+        } else if (value instanceof Double) {
+            cell.setCellValue((Double) value);
+        } else if (value instanceof Date) {
+            cell.setCellValue(value.toString());
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
-        }else {
-            cell.setCellValue((String) value);
+        } else {
+            cell.setCellValue(value != null ? value.toString() : ""); // Manejo de valores nulos
         }
         cell.setCellStyle(style);
     }
@@ -76,7 +76,6 @@ public class UserExcelExporter {
             createCell(row, columnCount++, pagomembresia.getFechaPago(), style);
             createCell(row, columnCount++, pagomembresia.getClientegymId(), style);
             createCell(row, columnCount++, pagomembresia.getMembresiaId(), style);
-
         }
     }
 
@@ -84,11 +83,14 @@ public class UserExcelExporter {
         writeHeaderLine();
         writeDataLines();
 
-        ServletOutputStream outputStream = response.getOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        outputStream.close();
-
+        try (ServletOutputStream outputStream = response.getOutputStream()) {
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            throw new IOException("Error writing Excel file", e);
+        } finally {
+            workbook.close();
+        }
     }
 }
+
+

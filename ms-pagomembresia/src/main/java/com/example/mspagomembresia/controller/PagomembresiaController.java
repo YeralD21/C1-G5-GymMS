@@ -65,7 +65,7 @@ public class PagomembresiaController {
         return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
     }
     @GetMapping("/excel")
-    public void exportToExcel(HttpServletResponse response) throws IOException {
+    public void exportToExcel(HttpServletResponse response) {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -74,11 +74,20 @@ public class PagomembresiaController {
         String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List<Pagomembresia> pagomembresias = pagoMembresiaService.listar();
-
-        UserExcelExporter excelExporter = new UserExcelExporter(pagomembresias);
-
-        excelExporter.export(response);
+        try {
+            List<Pagomembresia> pagomembresias = pagoMembresiaService.listar();
+            if (pagomembresias == null || pagomembresias.isEmpty()) {
+                throw new RuntimeException("No data available to export");
+            }
+            UserExcelExporter excelExporter = new UserExcelExporter(pagomembresias);
+            excelExporter.export(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
     }
 }
 
