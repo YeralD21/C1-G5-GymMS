@@ -44,7 +44,7 @@ public class PagoclaseController {
 
     }
     private BigDecimal calcularIGV(BigDecimal monto) {
-        BigDecimal porcentajeIGV = new BigDecimal("0.018"); // 18% de IGV
+        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
         return monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
     }
 
