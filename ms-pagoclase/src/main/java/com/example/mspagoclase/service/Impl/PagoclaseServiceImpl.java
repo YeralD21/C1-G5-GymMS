@@ -8,6 +8,9 @@ import com.example.mspagoclase.service.PagoclaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +30,10 @@ public class PagoclaseServiceImpl implements PagoclaseService {
 
     @Override
     public Pagoclase guardar(Pagoclase pagoclase) {
+        BigDecimal monto = BigDecimal.valueOf(pagoclase.getMonto()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal montoConIGV = calcularMontoConIGV(monto).setScale(2, RoundingMode.HALF_UP);
+        pagoclase.setMonto(montoConIGV.doubleValue());
+        pagoclase.setFechaPago(new Date());
         return pagoclaseRepository.save(pagoclase);
     }
 
@@ -43,6 +50,20 @@ public class PagoclaseServiceImpl implements PagoclaseService {
     @Override
     public void eliminar(Integer id) {
         pagoclaseRepository.deleteById(id);
+    }
+
+    @Override
+    public void procesarPago(Double montoConIGV) {
+        Pagoclase pagoclase = new Pagoclase();
+        pagoclase.setMonto(montoConIGV);
+        pagoclase.setFechaPago(new Date());
+        pagoclaseRepository.save(pagoclase);
+    }
+
+    private BigDecimal calcularMontoConIGV(BigDecimal monto) {
+        BigDecimal porcentajeIGV = new BigDecimal("0.018"); // 18% de IGV
+        BigDecimal igv = monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
+        return monto.add(igv);
     }
 }
 

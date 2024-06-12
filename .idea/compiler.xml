@@ -22,6 +22,7 @@
         <module name="ms-pedido-service" />
         <module name="ms-inscripcion" />
         <module name="ms-membresia" />
+        <module name="ms-clase" />
       </profile>
     </annotationProcessing>
   </component>
@@ -31,6 +32,7 @@
       <module name="ms-asesoramiento" options="-parameters" />
       <module name="ms-asistencia" options="-parameters" />
       <module name="ms-catalogogym" options="-parameters" />
+      <module name="ms-clase" options="-parameters" />
       <module name="ms-clientegym" options="-parameters" />
       <module name="ms-config-server" options="-parameters" />
       <module name="ms-gateway-server" options="-parameters" />

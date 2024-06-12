@@ -10,4 +10,6 @@ public interface PagoclaseService {
     public Pagoclase buscarPorId(Integer Id);
     public Pagoclase editar(Pagoclase pagoclase);
     public void eliminar(Integer Id);
+    public void procesarPago(Double montoConIGV);
+
 }

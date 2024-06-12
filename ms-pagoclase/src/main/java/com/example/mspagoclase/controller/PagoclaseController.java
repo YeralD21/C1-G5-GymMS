@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 @RestController
 @RequestMapping("/pagoclase")
@@ -21,8 +23,8 @@ public class PagoclaseController {
     @PostMapping
     public ResponseEntity<Pagoclase> guardar(@RequestBody Pagoclase pagoclase){
 
-        return  ResponseEntity.ok(pagoclaseService.guardar(pagoclase));
-
+        Pagoclase pagoclaseGuardada = pagoclaseService.guardar(pagoclase);
+        return ResponseEntity.ok(pagoclaseGuardada);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Pagoclase> buscarPorId(@PathVariable(required = true) Integer id){
@@ -41,6 +43,9 @@ public class PagoclaseController {
         return "Eliminacion Correcta";
 
     }
-
+    private BigDecimal calcularIGV(BigDecimal monto) {
+        BigDecimal porcentajeIGV = new BigDecimal("0.018"); // 18% de IGV
+        return monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
+    }
 
 }
