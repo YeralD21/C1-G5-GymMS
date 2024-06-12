@@ -44,6 +44,8 @@ spring:
           uri: lb://ms-asesoramiento-service
           predicates:
             - Path=/asesoramiento/**
+          filters:
+            - AuthFilter
         - id: ms-trainer-service
           uri: lb://ms-trainer-service
           predicates:
@@ -52,6 +54,8 @@ spring:
           uri: lb://ms-pagomembresia-service
           predicates:
             - Path=/pagomembresia/**
+          filters:
+            - AuthFilter
         - id: ms-instructor-service
           uri: lb://ms-instructor-service
           predicates:
@@ -60,10 +64,14 @@ spring:
           uri: lb://ms-clase-service
           predicates:
             - Path=/clase/**
+          filters:
+            - AuthFilter
         - id: ms-pagoclase-service
           uri: lb://ms-pagoclase-service
           predicates:
             - Path=/pagoclase/**
+          filters:
+            - AuthFilter
         - id: ms-inscripcion-service
           uri: lb://ms-inscripcion-service
           predicates:
