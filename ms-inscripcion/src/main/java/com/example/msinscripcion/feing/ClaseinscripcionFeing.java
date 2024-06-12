@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public interface ClaseinscripcionFeing {
     @GetMapping("/{id}")
     @CircuitBreaker(name = "claseinscripcionListarPorId", fallbackMethod = "fallbackClasePorId")
-    public ResponseEntity<ClaseinscripcionDto> buscarPorId(@PathVariable(required = true) Integer id);
+    public ResponseEntity<ClaseinscripcionDto> buscarPorId(@PathVariable Integer id);
 
     default ResponseEntity<ClaseinscripcionDto> fallbackClasePorId(Integer id, Exception e) {
         return ResponseEntity.ok(new ClaseinscripcionDto());
@@ -21,4 +21,3 @@ public interface ClaseinscripcionFeing {
     @PutMapping("/reducirCupo/{id}")
     void reducirCupo(@PathVariable("id") Integer id);
 }
-
