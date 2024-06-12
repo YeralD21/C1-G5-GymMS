@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,9 +30,12 @@ private PagomembresiaRepository pagomembresiaRepository;
 
     @Override
     public Pagomembresia guardar(Pagomembresia pagomembresia) {
+        BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto());
+        BigDecimal montoConIGV = monto.add(calcularIGV(monto));
+        pagomembresia.setMonto(montoConIGV.doubleValue());
+        pagomembresia.setFechaPago(new Date());
         return pagomembresiaRepository.save(pagomembresia);
     }
-
     @Override
     public Pagomembresia buscarPorId(Integer id) {
         Pagomembresia pagomembresia = pagomembresiaRepository.findById(id).get();
@@ -49,10 +54,16 @@ private PagomembresiaRepository pagomembresiaRepository;
     }
 
     @Override
-    public void procesarPago(BigDecimal montoConIGV) {
-        // Implementa la lógica para procesar el pago con el monto que incluye IGV
-        System.out.println("Procesando pago con IGV: " + montoConIGV);
-        // Aquí iría la lógica de negocio real, como guardar el pago en la base de datos
+    public void procesarPago(Double montoConIGV) {
+        Pagomembresia pagomembresia = new Pagomembresia();
+        pagomembresia.setMonto(montoConIGV);
+        pagomembresia.setFechaPago(new Date());
+        pagomembresiaRepository.save(pagomembresia);
+    }
+
+    private BigDecimal calcularIGV(BigDecimal monto) {
+        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
+        return monto.multiply(porcentajeIGV);
     }
 
 }

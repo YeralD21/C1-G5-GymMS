@@ -11,5 +11,5 @@ public interface PagoMembresiaService {
     public Pagomembresia buscarPorId(Integer Id);
     public Pagomembresia editar(Pagomembresia pagomembresia);
     public void eliminar(Integer Id);
-    public void procesarPago(BigDecimal montoConIGV);
+    public void procesarPago(Double montoConIGV);
 }

@@ -39,11 +39,11 @@ public class PagomembresiaController {
     }
 
     @PostMapping
-    public ResponseEntity<Pagomembresia> guardar(@RequestBody Pagomembresia pagomembresia){
-
-        return  ResponseEntity.ok(pagoMembresiaService.guardar(pagomembresia));
-
+    public ResponseEntity<Pagomembresia> guardar(@RequestBody Pagomembresia pagomembresia) {
+        Pagomembresia pagomembresiaGuardada = pagoMembresiaService.guardar(pagomembresia);
+        return ResponseEntity.ok(pagomembresiaGuardada);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Pagomembresia> buscarPorId(@PathVariable(required = true) Integer id){
         return  ResponseEntity.ok(pagoMembresiaService.buscarPorId(id));
@@ -97,23 +97,34 @@ public class PagomembresiaController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/procesar")
-    public ResponseEntity<Object> procesarPago(@RequestBody MontoRequest montoRequest) {
-        BigDecimal monto = montoRequest.getMonto();
-        BigDecimal montoConIGV = monto.add(calcularIGV(monto));
-        // Procesar pago con montoConIGV
-        pagoMembresiaService.procesarPago(montoConIGV);
+    @GetMapping
+    public ResponseEntity<List<Pagomembresia>> listarPagos() {
+        List<Pagomembresia> pagos = pagoMembresiaService.listar();
+        return ResponseEntity.ok(pagos);
+    }
+    /**@PostMapping("/procesar")
+    public ResponseEntity<Pagomembresia> procesarPago(@RequestBody MontoRequest montoRequest) {
+        Double monto = montoRequest.getMonto();
+        Double montoConIGV = monto + calcularIGV(monto);
 
-        // Crear respuesta JSON
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Pago procesado con IGV: " + montoConIGV);
+        Pagomembresia pagomembresia = new Pagomembresia();
+        pagomembresia.setMonto(montoConIGV);
+        pagomembresia.setFechaPago(new Date());
+        // Otros campos del objeto pagomembresia se deben configurar aquí según sea necesario
+        pagomembresia = pagoMembresiaService.guardar(pagomembresia);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(pagomembresia);
     }
 
-    private BigDecimal calcularIGV(BigDecimal monto) {
-        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
-        return monto.multiply(porcentajeIGV);
+    @GetMapping
+    public ResponseEntity<List<Pagomembresia>> listarPagos() {
+        List<Pagomembresia> pagos = pagoMembresiaService.listar();
+        return ResponseEntity.ok(pagos);
     }
+
+    private Double calcularIGV(Double monto) {
+        Double porcentajeIGV = 0.18; // 18% de IGV
+        return monto * porcentajeIGV;
+    }**/
 }
 

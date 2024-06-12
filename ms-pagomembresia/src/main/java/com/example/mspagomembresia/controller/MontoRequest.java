@@ -3,13 +3,13 @@ package com.example.mspagomembresia.controller;
 import java.math.BigDecimal;
 
 public class MontoRequest {
-    private BigDecimal monto;
+    private Double monto;
 
-    public BigDecimal getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(BigDecimal monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
     }
 }
