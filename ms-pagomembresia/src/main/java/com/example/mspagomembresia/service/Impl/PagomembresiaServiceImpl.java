@@ -62,7 +62,7 @@ private PagomembresiaRepository pagomembresiaRepository;
     }
 
     private BigDecimal calcularIGV(BigDecimal monto) {
-        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
+        BigDecimal porcentajeIGV = new BigDecimal("0.09"); // 18% de IGV
         return monto.multiply(porcentajeIGV);
     }
 
