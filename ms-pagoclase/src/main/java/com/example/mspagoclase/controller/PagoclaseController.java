@@ -21,8 +21,7 @@ public class PagoclaseController {
     }
 
     @PostMapping
-    public ResponseEntity<Pagoclase> guardar(@RequestBody Pagoclase pagoclase){
-
+    public ResponseEntity<Pagoclase> guardar(@RequestBody Pagoclase pagoclase) {
         Pagoclase pagoclaseGuardada = pagoclaseService.guardar(pagoclase);
         return ResponseEntity.ok(pagoclaseGuardada);
     }
@@ -43,9 +42,4 @@ public class PagoclaseController {
         return "Eliminacion Correcta";
 
     }
-    private BigDecimal calcularIGV(BigDecimal monto) {
-        BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
-        return monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
-    }
-
 }
