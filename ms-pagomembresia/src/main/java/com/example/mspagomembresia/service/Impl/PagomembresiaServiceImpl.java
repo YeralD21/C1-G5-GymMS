@@ -33,7 +33,7 @@ private PagomembresiaRepository pagomembresiaRepository;
     public Pagomembresia guardar(Pagomembresia pagomembresia) {
         BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto());
         BigDecimal montoConIGV = monto.add(calcularIGV(monto));
-        pagomembresia.setMonto(montoConIGV.doubleValue());
+        pagomembresia.setMonto(montoConIGV.setScale(2, RoundingMode.HALF_UP).doubleValue());
         pagomembresia.setFechaPago(new Date());
         return pagomembresiaRepository.save(pagomembresia);
     }

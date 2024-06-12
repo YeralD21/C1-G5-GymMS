@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class PagomembresiaController {
     public ResponseEntity<Pagomembresia> guardar(@RequestBody Pagomembresia pagomembresia) {
         BigDecimal monto = BigDecimal.valueOf(pagomembresia.getMonto());
         BigDecimal montoConIGV = monto.add(calcularIGV(monto));
-        pagomembresia.setMonto(montoConIGV.doubleValue());
+        pagomembresia.setMonto(montoConIGV.setScale(2, RoundingMode.HALF_UP).doubleValue());
         pagomembresia.setFechaPago(new Date());
         Pagomembresia pagomembresiaGuardada = pagoMembresiaService.guardar(pagomembresia);
         return ResponseEntity.ok(pagomembresiaGuardada);
@@ -100,6 +101,6 @@ public class PagomembresiaController {
 
     private BigDecimal calcularIGV(BigDecimal monto) {
         BigDecimal porcentajeIGV = new BigDecimal("0.18"); // 18% de IGV
-        return monto.multiply(porcentajeIGV);
+        return monto.multiply(porcentajeIGV).setScale(2, RoundingMode.HALF_UP);
     }
 }
