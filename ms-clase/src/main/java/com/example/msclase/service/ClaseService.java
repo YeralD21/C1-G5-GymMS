@@ -10,4 +10,6 @@ public interface ClaseService {
     public Clase buscarPorId(Integer Id);
     public Clase editar(Clase clase);
     public void eliminar(Integer Id);
+
+    public Clase reducirCupo(Integer claseId);  // Método para reducir cupos
 }

@@ -12,7 +12,11 @@ import java.util.List;
 public class ClaseController {
     @Autowired
     private ClaseService claseService;
-
+    @PutMapping("/reducirCupo/{id}")
+    public ResponseEntity<Clase> reducirCupo(@PathVariable Integer id) {
+        Clase clase = claseService.reducirCupo(id);
+        return ResponseEntity.ok(clase);
+    }
     @GetMapping
     public ResponseEntity<List<Clase>> listar(){
         return ResponseEntity.ok(claseService.listar());

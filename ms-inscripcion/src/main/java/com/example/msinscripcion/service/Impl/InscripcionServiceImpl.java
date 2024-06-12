@@ -21,6 +21,17 @@ public class InscripcionServiceImpl implements InscripcionService {
     private ClaseinscripcionFeing claseinscripcionFeing;
 
     @Override
+    public Inscripcion registrar(Inscripcion inscripcion) {
+        // Guardar inscripción
+        Inscripcion nuevaInscripcion = inscripcionRepository.save(inscripcion);
+
+        // Llamar a Feign client para reducir cupo
+        claseinscripcionFeing.reducirCupo(inscripcion.getClaseId());
+
+        return nuevaInscripcion;
+
+    }
+    @Override
     public List<Inscripcion> listar() {
         return inscripcionRepository.findAll();
     }

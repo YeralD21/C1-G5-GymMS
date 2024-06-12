@@ -21,6 +21,7 @@ public class ClaseServiceImpl implements ClaseService {
         return claseRepository.findAll();
     }
 
+
     @Override
     public Clase guardar(Clase clase) {
         return claseRepository.save(clase);
@@ -39,6 +40,13 @@ public class ClaseServiceImpl implements ClaseService {
     @Override
     public void eliminar(Integer id) {
         claseRepository.deleteById(id);
+    }
+
+    @Override
+    public Clase reducirCupo(Integer claseId) {
+        Clase clase = claseRepository.findById(claseId).orElseThrow(() -> new RuntimeException("Clase no encontrada"));
+        clase.setCuposDisponibles(clase.getCuposDisponibles() - 1);
+        return claseRepository.save(clase);
     }
 }
 

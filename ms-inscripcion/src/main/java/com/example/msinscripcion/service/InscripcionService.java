@@ -10,4 +10,6 @@ public interface InscripcionService {
     public Inscripcion buscarPorId(Integer Id);
     public Inscripcion editar(Inscripcion inscripcion);
     public void eliminar(Integer Id);
+
+    public Inscripcion registrar(Inscripcion inscripcion);
 }
