@@ -20,10 +20,9 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> guardar(@RequestBody Pedido pedido){
-
-        return  ResponseEntity.ok(pedidoService.guardar(pedido));
-
+    public ResponseEntity<Pedido> guardar(@RequestBody Pedido pedido) {
+        Pedido pedidoGuardado = pedidoService.guardar(pedido);
+        return ResponseEntity.ok(pedidoGuardado);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> buscarPorId(@PathVariable(required = true) Integer id){

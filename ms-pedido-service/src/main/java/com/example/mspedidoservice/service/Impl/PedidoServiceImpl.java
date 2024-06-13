@@ -8,6 +8,9 @@ import com.example.mspedidoservice.repository.PedidoRepository;
 import com.example.mspedidoservice.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -29,7 +32,26 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public Pedido guardar(Pedido pedido) {
+        // Calcular el precio con IGV para cada detalle del pedido
+        pedido.getDetalles().forEach(PedidoDetalle::calcularPrecioConIgv);
+
+        BigDecimal subtotal = calcularSubtotal(pedido);
+        BigDecimal montoConIgv = calcularMontoConIgv(subtotal).setScale(2, RoundingMode.HALF_UP);
+        // Aquí también puedes asignar el monto total al pedido si es necesario
+        // pedido.setMonto(montoConIgv.doubleValue());  // Descomentar si es necesario asignar el monto total
         return pedidoRepository.save(pedido);
+    }
+
+    private BigDecimal calcularSubtotal(Pedido pedido) {
+        return pedido.getDetalles().stream()
+                .map(detalle -> BigDecimal.valueOf(detalle.getPrecio()).multiply(BigDecimal.valueOf(detalle.getCantidad())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal calcularMontoConIgv(BigDecimal monto) {
+        BigDecimal porcentajeIgv = new BigDecimal(IGV_PERCENTAGE);
+        BigDecimal igv = monto.multiply(porcentajeIgv).setScale(2, RoundingMode.HALF_UP);
+        return monto.add(igv);
     }
 
     @Override
@@ -55,7 +77,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedidoRepository.deleteById(id);
     }
     @Override
-    public double calcularPrecioTotalConIGV(double subtotal) {
+    public double calcularPrecioTotalConIgv(double subtotal) {
         double igv = subtotal * IGV_PERCENTAGE;
         return subtotal + igv;
     }
