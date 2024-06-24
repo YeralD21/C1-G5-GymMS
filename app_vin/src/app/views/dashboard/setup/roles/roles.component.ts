@@ -29,6 +29,8 @@ import { RouterOutlet } from '@angular/router';
 import { abcForms } from '../../../../../environments/generals';
 import { Component, OnInit } from '@angular/core';
 import { RolesContainerComponent } from './containers/roles-container.component';
+import { User, Roles } from './models/roles.model';
+
 
 @Component({
     selector: 'app-setup',
@@ -49,9 +51,24 @@ import { RolesContainerComponent } from './containers/roles-container.component'
 export class RolesComponent implements OnInit {
     public title: string = '';
     abcForms: any;
+    users: User[] = [];
+
     constructor() {}
+
     ngOnInit() {
         this.title = 'Roles';
         this.abcForms = abcForms;
+        this.initializeUsers();
+    }
+
+    initializeUsers() {
+        this.users = [
+            { id: 1, name: 'Alice', role: Roles.ADMIN },
+            { id: 2, name: 'Bob', role: Roles.USER }
+        ];
+    }
+
+    assignRole(user: User, role: string) {
+        user.role = role;
     }
 }
