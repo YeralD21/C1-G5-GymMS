@@ -1,11 +1,12 @@
-import { Route } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { initialDataResolver } from 'app/app.resolvers';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { AuthGuard } from './providers/guards/auth.guard';
 import { NoAuthGuard } from './providers/guards/noAuth.guard';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
-export const appRoutes: Route[] = [
+const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'example' },
     { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'example' },
     {
@@ -56,3 +57,9 @@ export const appRoutes: Route[] = [
     },
     { path: 'unauthorized', component: UnauthorizedComponent },
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+export class AppRoutingModule {}

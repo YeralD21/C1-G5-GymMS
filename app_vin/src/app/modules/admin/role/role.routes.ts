@@ -1,9 +1,6 @@
-import { Routes } from '@angular/router';
-import { RoleComponent } from 'app/modules/admin/role/role.component';
+import { Route } from '@angular/router';
+import { RoleComponent } from './role.component';
 
-export default [
-    {
-        path: '',
-        component: RoleComponent,
-    },
-] as Routes;
+export const roleRoutes: Route[] = [
+    { path: '', component: RoleComponent }
+];

@@ -1,9 +1,6 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import { UsersComponent } from './users.component';
 
-export default [
-    {
-        path: '',
-        component: UsersComponent,
-    },
-] as Routes;
+export const userRoutes: Route[] = [
+    { path: '', component: UsersComponent }
+];
