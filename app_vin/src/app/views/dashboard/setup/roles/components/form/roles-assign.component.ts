@@ -159,12 +159,12 @@ export class RolesAssignComponent implements OnInit {
 
     getListModules(): void {
         let m = this._accessService.getAll$().subscribe(async response => {
-            this.modules = await response && response.data || [];
-            await this.rolesForm.patchValue({
-                Parent_id: String(this.modules[0].id)
-            });
-            await this.getListMenu(this.modules[0].id!);
-            m.unsubscribe();
+          this.modules = await response && response.data || [];
+          await this.rolesForm.patchValue({
+            Parent_id: String(this.modules[0].id)
+          });
+          await this.getListMenu(this.modules[0].id!);
+          m.unsubscribe();
         });
     }
 
