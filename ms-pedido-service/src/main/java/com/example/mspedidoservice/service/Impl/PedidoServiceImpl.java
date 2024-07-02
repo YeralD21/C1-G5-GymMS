@@ -64,6 +64,7 @@ public class PedidoServiceImpl implements PedidoService {
             return pedidoDetalle;
         }).toList();
         pedido.setDetalles(pedidoDetalles);
+
         return pedido;
     }
 

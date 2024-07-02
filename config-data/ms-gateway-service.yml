@@ -96,4 +96,8 @@ spring:
         - id: ms-tiposuscripcion-service
           uri: lb://ms-tiposuscripcion-service
           predicates:
-            - Path=/clasegym/**, /plan/**, /precioclaseplan/**
+            - Path=/clasegym/**, /plan/**, /precioclaseplan/**}
+        - id: ms-suscripcion-service
+          uri: lb://ms-suscripcion-service
+          predicates:
+            - Path=/suscripcion/**
