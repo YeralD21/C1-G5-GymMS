@@ -97,7 +97,11 @@ spring:
           uri: lb://ms-tiposuscripcion-service
           predicates:
             - Path=/clasegym/**, /plan/**, /precioclaseplan/**
+          filters:
+            - AuthFilter
         - id: ms-suscripcion-service
           uri: lb://ms-suscripcion-service
           predicates:
             - Path=/suscripcion/**
+          filters:
+            - AuthFilter
