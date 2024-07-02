@@ -47,11 +47,18 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
         if (precioclaseplanDto != null) {
             // Asignar Clasegym y Plan desde PrecioclaseplanDto
-            suscripcion.setClasegymDto(precioclaseplanDto.getClasegymDto());
+            ClasegymDto clasegymDto = precioclaseplanDto.getClasegymDto();
+            suscripcion.setClasegymDto(clasegymDto);
+
+            if (clasegymDto != null) {
+                PlanDto planDto = clasegymDto.getPlan();
+                clasegymDto.setPlan(planDto);
+            }
         }
 
         return suscripcionRepository.save(suscripcion);
     }
+
     @Override
     public Suscripcion buscarPorId(Integer id) {
         Suscripcion suscripcion = suscripcionRepository.findById(id)
@@ -66,11 +73,10 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
         if (precioclaseplanDto != null) {
-            // Obtener datos de ClaseGym y Plan desde PrecioclaseplanDto
+            // Asignar Clasegym y Plan desde PrecioclaseplanDto
             ClasegymDto clasegymDto = precioclaseplanDto.getClasegymDto();
             suscripcion.setClasegymDto(clasegymDto);
 
-            // Asignar PlanDto desde ClasegymDto
             if (clasegymDto != null) {
                 PlanDto planDto = clasegymDto.getPlan();
                 clasegymDto.setPlan(planDto);
@@ -79,7 +85,6 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
         return suscripcion;
     }
-
     @Override
     public Suscripcion editar(Suscripcion suscripcion) {
         return suscripcionRepository.save(suscripcion);
