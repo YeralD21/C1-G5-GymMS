@@ -44,18 +44,19 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         // Obtener datos de ClaseGym
         ClasegymDto clasegymDto = clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody();
         if (clasegymDto != null) {
-            PlanDto planDto = clasegymDto.getPlan(); // Asegúrate de que el plan esté siendo asignado
-            clasegymDto.setPlan(planDto);
+            PlanDto planDto = clasegymDto.getPlan(); // Obtener el plan del ClasegymDto
+            clasegymDto.setPlan(planDto); // Asignar el plan al ClasegymDto
             suscripcion.setClasegymDto(clasegymDto);
         }
 
         // Obtener datos de PrecioClasePlan
         PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
+        precioclaseplanDto.setClasegym(clasegymDto); // Asignar Clasegym al PrecioClasePlan
+        precioclaseplanDto.setPlan(clasegymDto.getPlan()); // Asignar Plan al PrecioClasePlan
         suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
         return suscripcionRepository.save(suscripcion);
     }
-
     @Override
     public Suscripcion buscarPorId(Integer id) {
         Suscripcion suscripcion = suscripcionRepository.findById(id)

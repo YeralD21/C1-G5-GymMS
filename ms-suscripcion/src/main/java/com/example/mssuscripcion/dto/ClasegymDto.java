@@ -14,4 +14,11 @@ public class ClasegymDto {
 
     private PlanDto plan;
 
+    public PlanDto getPlan() {
+        return plan;
+    }
+
+    public void setPlan(PlanDto plan) {
+        this.plan = plan;
+    }
 }

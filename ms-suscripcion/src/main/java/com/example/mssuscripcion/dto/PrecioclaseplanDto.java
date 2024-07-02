@@ -8,8 +8,25 @@ public class PrecioclaseplanDto {
     private Integer id;
     private Double precio;
 
-    private PlanDto planDto;
+    private PlanDto plan;
 
     private ClasegymDto clasegymDto;
 
+    public PlanDto getPlan() {
+        return plan;
+    }
+
+    public void setPlan(PlanDto plan) {
+        this.plan = plan;
+    }
+
+    public ClasegymDto getClasegym() {
+        return clasegymDto;
+    }
+
+    public void setClasegym(ClasegymDto clasegym) {
+        this.clasegymDto = clasegym;
+    }
 }
+
+
