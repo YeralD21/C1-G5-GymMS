@@ -1,6 +1,8 @@
 package com.example.mssuscripcion.service.Impl;
 
+import com.example.mssuscripcion.dto.ClasegymDto;
 import com.example.mssuscripcion.dto.ClientesusDto;
+import com.example.mssuscripcion.dto.PrecioclaseplanDto;
 import com.example.mssuscripcion.entity.Suscripcion;
 import com.example.mssuscripcion.feing.ClasegymFeing;
 import com.example.mssuscripcion.feing.ClientesusFeing;
@@ -38,11 +40,19 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
     @Override
     public Suscripcion buscarPorId(Integer id) {
-        Suscripcion suscripcion = suscripcionRepository.findById(id).get();
-        suscripcion.setClientesusDto(clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody());
+        Suscripcion suscripcion = suscripcionRepository.findById(id).orElseThrow(() -> new RuntimeException("Suscripción no encontrada"));
 
-        suscripcion.setClasegymDto(clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody());
-        suscripcion.setPrecioclaseplanDto(precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody());
+        // Obtener datos del cliente
+        ClientesusDto clientesusDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
+        suscripcion.setClientesusDto(clientesusDto);
+
+        // Obtener datos de ClaseGym
+        ClasegymDto clasegymDto = clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody();
+        suscripcion.setClasegymDto(clasegymDto);
+
+        // Obtener datos de PrecioClasePlan
+        PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
+        suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
 
 
