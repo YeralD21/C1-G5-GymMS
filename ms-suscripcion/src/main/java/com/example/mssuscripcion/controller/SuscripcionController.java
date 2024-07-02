@@ -24,10 +24,16 @@ public class SuscripcionController {
         return  ResponseEntity.ok(suscripcionService.guardar(suscripcion));
 
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Suscripcion> buscarPorId(@PathVariable(required = true) Integer id){
-        return  ResponseEntity.ok(suscripcionService.buscarPorId(id));
+    @PostMapping("/crear")
+    public ResponseEntity<Suscripcion> crearSuscripcion(@RequestBody Suscripcion suscripcion) {
+        Suscripcion nuevaSuscripcion = suscripcionService.guardar(suscripcion);
+        return ResponseEntity.ok(nuevaSuscripcion);
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Suscripcion> buscarPorId(@PathVariable Integer id) {
+        Suscripcion suscripcion = suscripcionService.buscarPorId(id);
+        return ResponseEntity.ok(suscripcion);
     }
 
     @PutMapping("/{id}")

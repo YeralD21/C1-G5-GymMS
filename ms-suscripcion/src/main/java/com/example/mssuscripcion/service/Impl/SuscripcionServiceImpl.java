@@ -41,19 +41,17 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         ClientesusDto clienteDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
         suscripcion.setClientesusDto(clienteDto);
 
-        // Obtener datos de ClaseGym
+        // Obtener datos de PrecioClasePlan
+        PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
+        suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
+
+        // Obtener datos de ClaseGym y asignar PlanDto dentro de ClasegymDto
         ClasegymDto clasegymDto = clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody();
         if (clasegymDto != null) {
             PlanDto planDto = clasegymDto.getPlan(); // Obtener el plan del ClasegymDto
             clasegymDto.setPlan(planDto); // Asignar el plan al ClasegymDto
             suscripcion.setClasegymDto(clasegymDto);
         }
-
-        // Obtener datos de PrecioClasePlan
-        PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
-        precioclaseplanDto.setClasegym(clasegymDto); // Asignar Clasegym al PrecioClasePlan
-        precioclaseplanDto.setPlan(clasegymDto.getPlan()); // Asignar Plan al PrecioClasePlan
-        suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
         return suscripcionRepository.save(suscripcion);
     }
@@ -66,11 +64,11 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         ClientesusDto clienteDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
         suscripcion.setClientesusDto(clienteDto);
 
-        // Obtener datos de ClaseGym
+        // Obtener datos de ClaseGym y asignar PlanDto dentro de ClasegymDto
         ClasegymDto clasegymDto = clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody();
         if (clasegymDto != null) {
-            PlanDto planDto = clasegymDto.getPlan(); // Asegúrate de que el plan esté siendo asignado
-            clasegymDto.setPlan(planDto);
+            PlanDto planDto = clasegymDto.getPlan(); // Obtener el plan del ClasegymDto
+            clasegymDto.setPlan(planDto); // Asignar el plan al ClasegymDto
             suscripcion.setClasegymDto(clasegymDto);
         }
 
