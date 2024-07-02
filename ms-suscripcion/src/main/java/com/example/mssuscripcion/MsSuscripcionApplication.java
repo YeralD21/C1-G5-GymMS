@@ -5,8 +5,9 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-
+@EnableFeignClients
 @SpringBootApplication
 public class MsSuscripcionApplication {
 
@@ -16,7 +17,7 @@ public class MsSuscripcionApplication {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI().info(new Info()
-				.title("OPEN API MICROSERVICIO SUSCRIPCION")
+				.title("OPEN API MICROSERVICIO SUSCRIPCION@EnableFeignClients")
 				.version("0.0.1")
 				.description("servicios web Suscripcion")
 				.termsOfService("http:// swagger.io/terms")

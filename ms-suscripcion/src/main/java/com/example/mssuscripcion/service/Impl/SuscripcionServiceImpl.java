@@ -40,8 +40,8 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         Suscripcion suscripcion = suscripcionRepository.findById(id).get();
         suscripcion.setClientesusDto(clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody());
 
-        suscripcion.setClasegymDto(clasegymFeing.buscarPorId(suscripcion.getClientegymId()).getBody());
-        suscripcion.setPrecioclaseplanDto(precioclaseplanFeing.buscarPorId(suscripcion.getPrec()).getBody());
+        suscripcion.setClasegymDto(clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody());
+        suscripcion.setPrecioclaseplanDto(precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody());
 
 
         return suscripcion;

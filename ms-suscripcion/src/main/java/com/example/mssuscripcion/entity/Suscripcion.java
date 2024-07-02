@@ -19,7 +19,10 @@ public class Suscripcion {
     private Date FechaInicio;
     private Date FechaFin;
     private Integer clientegymId;
-    private Integer tiposuscripcionId;
+    private Integer clasegymId;
+    private Integer PrecioclaseplanId;
+
+
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
