@@ -17,7 +17,7 @@ public class MsSuscripcionApplication {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI().info(new Info()
-				.title("OPEN API MICROSERVICIO SUSCRIPCION@EnableFeignClients")
+				.title("OPEN API MICROSERVICIO SUSCRIPCION")
 				.version("0.0.1")
 				.description("servicios web Suscripcion")
 				.termsOfService("http:// swagger.io/terms")
