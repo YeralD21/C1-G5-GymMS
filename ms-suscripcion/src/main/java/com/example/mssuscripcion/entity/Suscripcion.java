@@ -2,6 +2,7 @@ package com.example.mssuscripcion.entity;
 
 import com.example.mssuscripcion.dto.ClasegymDto;
 import com.example.mssuscripcion.dto.ClientesusDto;
+import com.example.mssuscripcion.dto.PlanDto;
 import com.example.mssuscripcion.dto.PrecioclaseplanDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -34,6 +35,8 @@ public class Suscripcion {
 
     @Transient
     PrecioclaseplanDto precioclaseplanDto;
+
+
 
 
 }
