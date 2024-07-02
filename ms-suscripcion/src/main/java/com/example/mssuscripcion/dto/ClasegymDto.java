@@ -12,6 +12,6 @@ public class ClasegymDto {
     private String Tipoclase; //zumba, X-Box, baile, musculación
     private Integer cuposDisponibles;
 
-    private PlanDto plan;
+    private PlanDto planDto;
 
 }
