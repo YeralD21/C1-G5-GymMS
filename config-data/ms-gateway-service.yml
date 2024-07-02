@@ -93,3 +93,7 @@ spring:
           uri: lb://ms-auth-service
           predicates:
             - Path=/auth/**
+        - id: ms-tiposuscripcion-service
+          uri: lb://ms-tiposuscripcion-service
+          predicates:
+            - Path=/clasegym/**, /plan/**, /precioclaseplan/**
