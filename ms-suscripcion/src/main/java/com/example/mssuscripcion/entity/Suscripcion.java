@@ -20,7 +20,7 @@ public class Suscripcion {
     private Date FechaFin;
     private Integer clientegymId;
     private Integer clasegymId;
-    private Integer PrecioclaseplanId;
+    private Integer precioclaseplanId;
 
 
 
