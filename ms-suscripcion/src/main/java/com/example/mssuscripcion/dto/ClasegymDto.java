@@ -6,19 +6,8 @@ import lombok.Data;
 
 @Data
 public class ClasegymDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String Tipoclase; //zumba, X-Box, baile, musculación
+    private String tipoclase; // zumba, X-Box, baile, musculación
     private Integer cuposDisponibles;
-
     private PlanDto plan;
-
-    public PlanDto getPlan() {
-        return plan;
-    }
-
-    public void setPlan(PlanDto plan) {
-        this.plan = plan;
-    }
 }

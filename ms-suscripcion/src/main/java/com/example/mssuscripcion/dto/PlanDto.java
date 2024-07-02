@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 
 public class PlanDto {
-
     private Integer id;
-    private String tiempo; //Mensual, Trimestral, Anual
+    private String tiempo; // Mensual, Trimestral, Anual
 }
