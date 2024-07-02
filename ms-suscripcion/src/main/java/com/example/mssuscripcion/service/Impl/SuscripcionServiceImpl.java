@@ -1,5 +1,6 @@
 package com.example.mssuscripcion.service.Impl;
 
+import com.example.mssuscripcion.dto.ClientesusDto;
 import com.example.mssuscripcion.entity.Suscripcion;
 import com.example.mssuscripcion.feing.ClasegymFeing;
 import com.example.mssuscripcion.feing.ClientesusFeing;
@@ -42,6 +43,7 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
         suscripcion.setClasegymDto(clasegymFeing.buscarPorId(suscripcion.getClasegymId()).getBody());
         suscripcion.setPrecioclaseplanDto(precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody());
+
 
 
         return suscripcion;
