@@ -54,14 +54,18 @@ public class SuscripcionServiceImpl implements SuscripcionService {
         Suscripcion suscripcion = suscripcionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Suscripción no encontrada"));
 
+        // Obtener datos del cliente
         ClientesusDto clienteDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
         suscripcion.setClientesusDto(clienteDto);
 
+        // Obtener datos de PrecioClasePlan
         PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
         suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
+        // Obtener y asignar ClasegymDto desde PrecioClasePlanDto
         if (precioclaseplanDto != null) {
-            suscripcion.setClasegymDto(precioclaseplanDto.getClasegymDto());
+            ClasegymDto clasegymDto = precioclaseplanDto.getClasegymDto();
+            suscripcion.setClasegymDto(clasegymDto);
         }
 
         return suscripcion;
