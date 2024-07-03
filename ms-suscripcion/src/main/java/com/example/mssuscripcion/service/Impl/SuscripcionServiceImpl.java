@@ -37,54 +37,36 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
     @Override
     public Suscripcion guardar(Suscripcion suscripcion) {
-        // Obtener datos del cliente
         ClientesusDto clienteDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
         suscripcion.setClientesusDto(clienteDto);
 
-        // Obtener datos de PrecioClasePlan
         PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
         suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
         if (precioclaseplanDto != null) {
-            // Asignar Clasegym y Plan desde PrecioclaseplanDto
-            ClasegymDto clasegymDto = precioclaseplanDto.getClasegymDto();
-            suscripcion.setClasegymDto(clasegymDto);
-
-            if (clasegymDto != null) {
-                PlanDto planDto = clasegymDto.getPlan();
-                clasegymDto.setPlan(planDto);
-            }
+            suscripcion.setClasegymDto(precioclaseplanDto.getClasegymDto());
         }
 
         return suscripcionRepository.save(suscripcion);
     }
-
     @Override
     public Suscripcion buscarPorId(Integer id) {
         Suscripcion suscripcion = suscripcionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Suscripción no encontrada"));
 
-        // Obtener datos del cliente
         ClientesusDto clienteDto = clientesusFeing.buscarPorId(suscripcion.getClientegymId()).getBody();
         suscripcion.setClientesusDto(clienteDto);
 
-        // Obtener datos de PrecioClasePlan
         PrecioclaseplanDto precioclaseplanDto = precioclaseplanFeing.buscarPorId(suscripcion.getPrecioclaseplanId()).getBody();
         suscripcion.setPrecioclaseplanDto(precioclaseplanDto);
 
         if (precioclaseplanDto != null) {
-            // Asignar Clasegym y Plan desde PrecioclaseplanDto
-            ClasegymDto clasegymDto = precioclaseplanDto.getClasegymDto();
-            suscripcion.setClasegymDto(clasegymDto);
-
-            if (clasegymDto != null) {
-                PlanDto planDto = clasegymDto.getPlan();
-                clasegymDto.setPlan(planDto);
-            }
+            suscripcion.setClasegymDto(precioclaseplanDto.getClasegymDto());
         }
 
         return suscripcion;
     }
+
     @Override
     public Suscripcion editar(Suscripcion suscripcion) {
         return suscripcionRepository.save(suscripcion);
