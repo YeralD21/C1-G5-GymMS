@@ -15,8 +15,6 @@ export class AppComponent implements OnInit{
     instructorForm: FormGroup;
     categoriaForm: FormGroup;
     productoForm: FormGroup;
-    claseForm: FormGroup;  // Añadir el nuevo formulario para Clase
-
 
     /**
      * Constructor
@@ -50,14 +48,6 @@ export class AppComponent implements OnInit{
         this.productoForm = this.fb.group({
             nombre: ['', Validators.required],
             categoriaId: ['', Validators.required],  // Assuming you store the categoria ID as a string; adjust as necessary
-        });
-        // Añadir la configuración para el formulario de Clase
-        this.claseForm = this.fb.group({
-            tipo: ['', Validators.required],
-            hora: ['', Validators.required],
-            costo: ['', Validators.required],
-            cuposDisponibles: ['', Validators.required],
-            instructor: ['', Validators.required]  // Suponiendo que almacenas el ID del instructor como cadena; ajusta según sea necesario
         });
     }
 }

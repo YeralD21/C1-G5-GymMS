@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'app-clients-new',
+    selector: 'app-trainer-new',
     standalone: true,
     imports: [
         FormsModule,
@@ -38,7 +38,7 @@ import { MatInputModule } from '@angular/material/input';
             </div>
 
             <!-- Compose form -->
-            <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="clientForm">
+            <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="trainerForm">
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
                     <input matInput formControlName="nombre" />
@@ -48,24 +48,16 @@ import { MatInputModule } from '@angular/material/input';
                     <input matInput formControlName="apellido" />
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Género</mat-label>
-                    <input matInput formControlName="genero" />
+                    <mat-label>Especialidad</mat-label>
+                    <input matInput formControlName="especialidad" />
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Edad</mat-label>
-                    <input matInput formControlName="edad" />
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Telefono</mat-label>
-                        <input matInput formControlName="telefono" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Correo</mat-label>
-                    <input matInput formControlName="correo" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Tipo Cliente</mat-label>
-                    <input matInput formControlName="tipocliente" />
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput formControlName="telefono" />
                 </mat-form-field>
                 <!-- Actions -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
@@ -81,14 +73,12 @@ import { MatInputModule } from '@angular/material/input';
 export class TrainerNewComponent implements OnInit {
     @Input() title: string = '';
     abcForms: any;
-    clientForm = new FormGroup({
+    trainerForm = new FormGroup({
         nombre: new FormControl('', [Validators.required]),
         apellido: new FormControl('', [Validators.required]),
-        genero: new FormControl('', [Validators.required]),
-        edad: new FormControl('', [Validators.required]),
+        especialidad: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
         telefono: new FormControl('', [Validators.required]),
-        correo: new FormControl('', [Validators.required, Validators.email]),
-        tipocliente: new FormControl('', [Validators.required]),
     });
 
     constructor(private dialogRef: MatDialogRef<TrainerNewComponent>) {}
@@ -98,8 +88,8 @@ export class TrainerNewComponent implements OnInit {
     }
 
     public saveForm(): void {
-        if (this.clientForm.valid) {
-            this.dialogRef.close(this.clientForm.value);
+        if (this.trainerForm.valid) {
+            this.dialogRef.close(this.trainerForm.value);
         }
     }
 

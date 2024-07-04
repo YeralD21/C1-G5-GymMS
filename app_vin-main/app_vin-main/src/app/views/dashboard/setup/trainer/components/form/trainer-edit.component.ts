@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { abcForms } from '../../../../../../../environments/generals';
-import { Client } from '../../models/client';
+import { Trainer } from '../../models/trainer';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-client-edit',
+    selector: 'app-trainer-edit',
     standalone: true,
     imports: [FormsModule, MatIconModule, MatButtonModule, ReactiveFormsModule, MatSlideToggleModule, MatFormFieldModule, MatInputModule],
     template: `
@@ -24,7 +24,7 @@ import { MatDialogRef } from '@angular/material/dialog';
             </div>
 
             <!-- Compose form -->
-            <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="clientForm">
+            <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="trainerForm">
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
                     <input matInput formControlName="nombre" />
@@ -34,24 +34,16 @@ import { MatDialogRef } from '@angular/material/dialog';
                     <input matInput formControlName="apellido" />
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Género</mat-label>
-                    <input matInput formControlName="genero" />
+                    <mat-label>Especialidad</mat-label>
+                    <input matInput formControlName="especialidad" />
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Edad</mat-label>
-                    <input matInput formControlName="edad" />
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Teléfono</mat-label>
                     <input matInput formControlName="telefono" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Correo</mat-label>
-                    <input matInput formControlName="correo" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Tipo Cliente</mat-label>
-                    <input matInput formControlName="tipocliente" />
                 </mat-form-field>
                 <!-- Actions -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
@@ -65,47 +57,29 @@ import { MatDialogRef } from '@angular/material/dialog';
     `
 })
 export class TrainerEditComponent implements OnInit {
-    clientForm = new FormGroup({
-        nombre: new FormControl('', [Validators.required]),
-        apellido: new FormControl('', [Validators.required]),
-        genero: new FormControl('', [Validators.required]),
-        edad: new FormControl('', [Validators.required]),
-        telefono: new FormControl('', [Validators.required]),
-        correo: new FormControl('', [Validators.required]),
-        tipocliente: new FormControl('', [Validators.required]),
-    });
-    @Input() title: string = '';
-    @Input() client = new Client();
-    abcForms: any;
+    @Input() title: string;
+    @Input() trainer: Trainer;
+    trainerForm: FormGroup;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private dialogRef: MatDialogRef<TrainerEditComponent>,
-    ) {}
+    constructor(private dialogRef: MatDialogRef<TrainerEditComponent>, private fb: FormBuilder) { }
 
-    ngOnInit() {
-        this.abcForms = abcForms;
+    ngOnInit(): void {
+        this.trainerForm = this.fb.group({
+            nombre: [this.trainer?.nombre, Validators.required],
+            apellido: [this.trainer?.apellido, Validators.required],
+            especialidad: [this.trainer?.especialidad, Validators.required],
+            email: [this.trainer?.email, [Validators.required, Validators.email]],
+            telefono: [this.trainer?.telefono, Validators.required]
+        });
+    }
 
-        if (this.client) {
-            this.clientForm.patchValue({
-                nombre: this.client.nombre,
-                apellido: this.client.apellido,
-                genero: this.client.genero,
-                edad: this.client.edad,
-                telefono: this.client.telefono,
-                correo: this.client.correo,
-                tipocliente: this.client.tipocliente,
-            });
+    saveForm(): void {
+        if (this.trainerForm.valid) {
+            this.dialogRef.close({ ...this.trainer, ...this.trainerForm.value });
         }
     }
 
-    public saveForm(): void {
-        if (this.clientForm.valid) {
-            this.dialogRef.close(this.clientForm.value);
-        }
-    }
-
-    public cancelForm(): void {
-        this.dialogRef.close(null);
+    cancelForm(): void {
+        this.dialogRef.close();
     }
 }

@@ -138,13 +138,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                 icon: 'heroicons_outline:chart-pie',
                 link: '/example',
                 children: [
-                    {
-                        id: 'SetupRole',
-                        title: 'Setup Role',
-                        type: 'basic',
-                        icon: 'heroicons_outline:chart-pie',
-                        link: '/homeScreen/setup/role',
-                    },
+                    
                     {
                         id: 'SetupClient',
                         title: 'Setup Cliente',
@@ -166,13 +160,6 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                         icon: 'heroicons_outline:chart-pie',
                         link: '/homeScreen/setup/trainer',
                     },
-                    {
-                        id: 'SetupClase',
-                        title: 'Setup Clase',
-                        type: 'basic',
-                        icon: 'heroicons_outline:chart-pie',
-                        link: '/homeScreen/setup/clase',
-                    },
 
 
                 ],
@@ -182,9 +169,9 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         ];
         this.user = {
             id: 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
-            name: 'Brian Hughes',
-            email: 'hughes.brian@company.com',
-            avatar: 'assets/images/avatars/brian-hughes.jpg',
+            name: 'CRIS Ch',
+            email: 'chuqui.chura@company.com@company.com',
+            avatar: 'assets/images/avatars/sin titulo-1.jpg',
             status: 'online',
         };
 
