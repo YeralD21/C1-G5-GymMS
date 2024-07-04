@@ -10,5 +10,5 @@ export interface Clase {
     hora: string;
     costo: number;
     cuposDisponibles: number;
-    instructor: Instructor;
+    instructor: Instructor;  // Asegúrate de que instructor es del tipo Instructor
 }

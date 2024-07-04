@@ -38,9 +38,9 @@ export class ClaseContainerComponent implements OnInit {
     public clase: Clase = {} as Clase;
 
     constructor(
-        private _claseService: ClaseService,
-        private _confirmDialogService: ConfirmDialogService,
-        private _matDialog: MatDialog,
+        private claseService: ClaseService,
+        private confirmDialogService: ConfirmDialogService,
+        private matDialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     getClases(): void {
-        this._claseService.getAll$().subscribe(
+        this.claseService.getAll$().subscribe(
             (response) => {
                 this.clases = response;
             },
@@ -59,7 +59,7 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     public eventNew(): void {
-        const claseForm = this._matDialog.open(ClaseNewComponent);
+        const claseForm = this.matDialog.open(ClaseNewComponent);
         claseForm.componentInstance.title = 'Nueva Clase';
         claseForm.afterClosed().subscribe((result: any) => {
             if (result) {
@@ -69,7 +69,7 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     saveClase(data: Clase): void {
-        this._claseService.add$(data).subscribe((response) => {
+        this.claseService.add$(data).subscribe((response) => {
             if (response) {
                 this.getClases();
             }
@@ -77,9 +77,9 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     public eventEdit(idClase: number): void {
-        this._claseService.getById$(idClase).subscribe((response) => {
-            this.clase = response || {} as Clase;
-            const claseForm = this._matDialog.open(ClaseEditComponent);
+        this.claseService.getById$(idClase).subscribe((response) => {
+            this.clase = response || ({} as Clase);
+            const claseForm = this.matDialog.open(ClaseEditComponent);
             claseForm.componentInstance.title = `Editar ${this.clase.tipo}`;
             claseForm.componentInstance.clase = this.clase;
             claseForm.afterClosed().subscribe((result: any) => {
@@ -91,7 +91,7 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     editClase(idClase: number, data: Clase): void {
-        this._claseService.update$(idClase, data).subscribe((response) => {
+        this.claseService.update$(idClase, data).subscribe((response) => {
             if (response) {
                 this.getClases();
             }
@@ -99,14 +99,17 @@ export class ClaseContainerComponent implements OnInit {
     }
 
     public eventDelete(idClase: number) {
-        this._confirmDialogService.confirmDelete({
-            // title: 'Confirmación Personalizada',
-            // message: ¿Quieres proceder con esta acción ${}?,
-        }).then(() => {
-            this._claseService.delete$(idClase).subscribe((response) => {
-                this.clases = response;
-            });
-            this.getClases();
-        }).catch(() => {});
+        this.confirmDialogService
+            .confirmDelete({
+                // title: 'Confirmación Personalizada',
+                // message: ¿Quieres proceder con esta acción ${}?,
+            })
+            .then(() => {
+                this.claseService.delete$(idClase).subscribe((response) => {
+                    this.clases = response;
+                });
+                this.getClases();
+            })
+            .catch(() => {});
     }
 }

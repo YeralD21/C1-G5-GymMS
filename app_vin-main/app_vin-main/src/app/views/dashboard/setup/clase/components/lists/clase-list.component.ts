@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,7 +40,7 @@ import { Clase } from '../../models/clase';
                             <td class="w-2/6 p-2 text-center border-b text-sm">{{ clase.hora }}</td>
                             <td class="w-2/6 p-2 text-center border-b text-sm">{{ clase.costo }}</td>
                             <td class="w-2/6 p-2 text-center border-b text-sm">{{ clase.cuposDisponibles }}</td>
-                            <td class="w-2/6 p-2 text-center border-b text-sm">{{ clase.instructor.nombre }}</td>
+                            <td class="w-2/6 p-2 text-center border-b text-sm">{{ clase.instructor?.nombre }}</td>
                             <td class="w-2/6 p-2 text-center border-b text-sm">
                                 <div class="flex justify-center space-x-3">
                                     <mat-icon class="text-amber-400 hover:text-amber-500 cursor-pointer" (click)="goEdit(clase.id)">edit</mat-icon>

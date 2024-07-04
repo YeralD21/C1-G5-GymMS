@@ -1,17 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ClaseNewComponent } from './components/form/clase-new.component';
-import { ClaseEditComponent } from './components/form/clase-edit.component';
-import { ClaseContainerComponent } from './containers/clase-container.component';
+import { Route } from '@angular/router';
+import { ClaseComponent } from './clase.component';
 
-const routes: Routes = [
-    { path: 'clases', component: ClaseContainerComponent },
-    { path: 'clases/new', component: ClaseNewComponent },
-    { path: 'clases/edit/:id', component: ClaseEditComponent }
+const routes: Route[] = [
+    {
+        path: '',
+        component: ClaseComponent
+    }
 ];
 
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-})
-export class ClaseRoutingModule { }
+export default routes;
