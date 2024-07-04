@@ -6,10 +6,14 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class InstructorService extends EntityDataService<any> {
+export class ClaseService extends EntityDataService<any> {
     constructor(protected override httpClient: HttpClient) {
-        super(httpClient, END_POINTS.setup.instructor);
+        super(httpClient, END_POINTS.setup.clase);
     }
 
-    // Otros métodos para manejar los instructores
+    createClase(clase: any): Observable<IResponse> {
+        return this.httpClient.post<IResponse>(END_POINTS.setup.clase, clase);
+    }
+
+    // Otros métodos para manejar las clases
 }
